@@ -2280,14 +2280,23 @@ console.log(Object.getPrototypeOf(obj)); // {prototypeValue2: 'prototypeValue2'}
 Combining `Object.create()`, `Object.getPrototypeOf()`, and `Object.getOwnPropertyDescriptors()` helps us to copy an object with all of its properties and descriptors:
 
 ```js
+// Object that will be used as a prototype
 const Prototype1 = {
   prototypeProp1: "prototypeValue1",
 };
 
-const powerfulCopyOfObject = Object.create(
-  Object.getPrototypeOf(Prototype1),
+const obj = {};
+
+// Set the Prototype1 as the prototype of obj
+Object.setPrototypeOf(obj, Prototype1);
+console.log(Object.getPrototypeOf(obj)); // {prototypeValue1: 'prototypeValue1'}
+
+const powerfulCopyOfObj = Object.create(
+  Object.getPrototypeOf(obj),
   Object.getOwnPropertyDescriptors(Prototype1)
 );
+
+console.log(Object.getPrototypeOf(powerfulCopyOfObj)); // {prototypeValue1: 'prototypeValue1'}
 ```
 
 <hr>
